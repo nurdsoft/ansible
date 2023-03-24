@@ -1,0 +1,8 @@
+---
+ - name: Calls the role
+   hosts: localhost
+   gather_facts: false
+   become: yes
+   vars_files: custom_variables.yml
+   roles: 
+    - commands_with_default_key_value_pair

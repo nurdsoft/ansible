@@ -1,0 +1,23 @@
+---
+ - hosts: localhost
+   vars:
+   gather_facts: false
+   become: yes
+   tasks:
+    - block:
+      - name: install unzip
+        apt:
+          name:
+            - unzip
+          state: latest
+          
+      - name: terraform install
+        unarchive:
+          src: https://releases.hashicorp.com/terraform/1.4.2/terraform_1.4.2_linux_amd64.zip
+          dest: /usr/bin
+          remote_src: True
+      
+      - name: check if install was successful
+        command: terraform --version
+        register: terraform_ver
+        failed_when: "'command not found' in terraform_ver.stderr"

@@ -1,0 +1,8 @@
+---
+  #Changed aws format as table instead of json
+  aws_access_key: 'AKIAIOSFODNN7EXAMPLE'
+  aws_secret_key: 'wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY'
+  aws_region: 'us-west-2'
+  aws_format: 'table'
+  aws_system_user: root
+  aws_profile: default

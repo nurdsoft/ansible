@@ -1,0 +1,82 @@
+Steps to test the Playbook locally using framework
+====================================================
+
+We can use the molecule framework to test the playbook locally.
+
+1. Preparing the Environment
+-------------------------------
+
+create a virtual environment to test Ansible with Molecule
+
+python3 -m venv my_env
+source my_env/bin/activate
+python3 -m pip install molecule docker
+
+2. Create a Role in Molecule
+-----------------------------
+
+We will create initial role which will create the directory structure and some initial tests, and specify Docker as the driver so that Molecule uses Docker to run its tests
+
+molecule init role -r ansible-role -d docker
+cd ansible-role
+molecule test
+
+3. Customize role in below path
+-------------------------------
+nano tasks/main.yml
+
+4. Update molecule.yml file
+------------------------------
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: centos7
+    image: milcom/centos7-systemd
+    privileged: true
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: default
+verifier:
+  name: testinfra
+  lint:
+    name: flake8
+
+
+5. Writing Test Cases in molecule/default/tests/test_default.py
+---------------------------------------------------------------
+
+import os
+import pytest
+
+import testinfra.utils.ansible_runner
+
+...
+testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
+    os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
+
+...
+#The test begins with the pytest.mark.parametrize decorator, which allows us to parameterize the arguments for the test.
+@pytest.mark.parametrize('pkg', [
+  'vault',
+  'terraform'
+])
+def test_pkg(host, pkg):
+    package = host.package(pkg)
+
+    assert package.is_installed
+
+
+6. Testing the Role with Molecule
+----------------------------------
+molecule test
+
+Molecule will execute the actions which are defined
+

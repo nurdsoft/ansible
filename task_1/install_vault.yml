@@ -1,0 +1,41 @@
+---
+ - hosts: localhost
+   vars:
+   gather_facts: false
+   become: yes
+   tasks:
+    - block:
+      - name: create the vault folder
+        file:
+          path: /opt/vault/directory
+          state: directory
+          mode: '0755'
+
+      - name: download vault installer
+        get_url:
+          url: https://releases.hashicorp.com/vault/1.13.0/vault_1.13.0_linux_amd64.zip
+          dest: /opt/vault/directory/vault_1.13.0_linux_amd64.zip
+          mode: '0440'
+
+      - name: install unzip
+        apt:
+          name:
+            - unzip
+          state: latest
+
+      - name: unzip the package
+        unarchive:
+          src: /opt/vault/directory/vault_1.13.0_linux_amd64.zip
+          dest: /usr/local/bin
+          remote_src: yes
+
+      - name: chown the vault file
+        file:
+          path: /usr/local/bin/vault
+          owner: root
+          group: root
+
+      - name: check if install was successful
+        command: vault --version
+        register: vault_ver
+        failed_when: "'command not found' in vault_ver.stderr"

@@ -1,0 +1,11 @@
+---
+# tasks file for commands_with_default_key_value_pair
+  - name: Configure AWS.
+    shell: aws configure set {{ item.key }} {{ item.value }} --profile {{ aws_profile }}
+    with_dict:
+      aws_access_key_id: "{{ aws_access_key }}"
+      aws_secret_access_key: "{{ aws_secret_key }}"
+      region: "{{ aws_region }}"
+      format: "{{ aws_format }}"
+    become_user: "{{ aws_system_user }}"
+    changed_when: false
