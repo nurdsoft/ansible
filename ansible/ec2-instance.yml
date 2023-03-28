@@ -2,9 +2,9 @@
   roles:
     - role: ec2
   vars:
-    ami_id: ami-0123456789abcdef0
-    count: 2
-    instance_type: t3.small
-    key_name: my_other_key_pair
-    security_group_ids: sg-0123456789abcdef0
+    ami_id: 0c94855ba95c71c99
+    count: 1
+    instance_type: t2.micro
+    key_name: my-key-pair
+    security_group_ids: sg-1234567890abcdef0
 
