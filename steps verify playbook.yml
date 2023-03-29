@@ -1,0 +1,19 @@
+1. Create a new directory
+
+mkdir test-playbook
+cd test-playbook
+
+2. Host file with following content
+
+[local]
+localhost ansible_connection=local
+
+and create a file playbook.yml
+
+3. Create a new directory with name templates inside the test-playbook directory:
+
+mkdir templates
+
+4. Run the playbook using the following command:
+
+ansible-playbook -i hosts playbook.yml
