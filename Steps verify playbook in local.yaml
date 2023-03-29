@@ -1,0 +1,27 @@
+1. Create a new directory
+
+mkdir test-playbook
+cd test-playbook
+
+2. Host file with following content as target
+
+[local]
+localhost ansible_connection=local
+
+and create a file playbook.yml
+
+3. Run the playbook using the ansible-playbook command:
+
+ansible-playbook -i hosts playbook.yml
+This will execute the playbook on the local host.
+
+4. Run the playbook using the following command:
+
+ansible-playbook -i hosts playbook.yml
+
+
+5. Verify that Terraform and Vault are installed by running the following commands:
+
+terraform --version
+vault --version
+If the installations were successful, you should see the versions of Terraform and Vault that were installed.
