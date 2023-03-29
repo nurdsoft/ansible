@@ -1,0 +1,28 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Install required packages
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - unzip
+        - wget
+
+    - name: Install Terraform
+      shell: |
+        cd /tmp
+        wget https://releases.hashicorp.com/terraform/1.1.0/terraform_1.4.2_linux_amd64.zip
+        unzip terraform_1.4.2_linux_amd64.zip
+        sudo mv terraform /usr/local/bin/
+        rm terraform_1.4.2_linux_amd64.zip
+
+    - name: Install Vault
+      shell: |
+        cd /tmp
+        wget https://releases.hashicorp.com/vault/1.13.0/vault_1.13.0_linux_amd64.zip
+        unzip vault_1.13.0_linux_amd64.zip
+        sudo mv vault /usr/local/bin/
+        rm vault_1.13.0_linux_amd64.zip
