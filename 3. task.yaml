@@ -1,0 +1,19 @@
+# Role
+- name: Run AWS command
+  command: aws s3 cp s3://{{ s3_bucket_name }}/sample.txt /destination/folder --region {{ aws_region }} --exclude '{{ s3_exclude_pattern }}'
+  vars:
+    s3_bucket_name: "default-bucket"
+    aws_region: "us-west-2"
+    s3_exclude_pattern: "*.log"
+  when: aws_s3_copy is defined and aws_s3_copy|bool
+
+# Playbook
+- name: My Playbook
+  hosts: my-host
+  roles:
+    - role: my-role
+      vars:
+        s3_bucket_name: "custom-bucket"
+        aws_region: "us-east-1"
+        s3_exclude_pattern: "*.txt"
+        aws_s3_copy: true
