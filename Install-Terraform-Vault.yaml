@@ -1,0 +1,47 @@
+---
+- name: Install Terraform and Vault
+  hosts: all
+  become: true
+  
+  vars:
+    terraform_version: "1.1.0"
+    vault_version: "1.8.3"
+  
+  tasks:
+    - name: Download and install Terraform
+      get_url:
+        url: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
+        dest: "/tmp/terraform.zip"
+      when: not ('/usr/local/bin/terraform' | exists)
+      
+    - name: Extract Terraform archive
+      unarchive:
+        src: "/tmp/terraform.zip"
+        dest: "/usr/local/bin"
+        copy: no
+      when: not ('/usr/local/bin/terraform' | exists)
+      
+    - name: Set Terraform executable permissions
+      file:
+        path: "/usr/local/bin/terraform"
+        mode: "+x"
+      when: not ('/usr/local/bin/terraform' | exists)
+      
+    - name: Download and install Vault
+      get_url:
+        url: "https://releases.hashicorp.com/vault/{{ vault_version }}/vault_{{ vault_version }}_linux_amd64.zip"
+        dest: "/tmp/vault.zip"
+      when: not ('/usr/local/bin/vault' | exists)
+      
+    - name: Extract Vault archive
+      unarchive:
+        src: "/tmp/vault.zip"
+        dest: "/usr/local/bin"
+        copy: no
+      when: not ('/usr/local/bin/vault' | exists)
+      
+    - name: Set Vault executable permissions
+      file:
+        path: "/usr/local/bin/vault"
+        mode: "+x"
+      when: not ('/usr/local/bin/vault' | exists)
