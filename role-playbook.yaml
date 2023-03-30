@@ -1,0 +1,19 @@
+---
+#Role
+
+- name: Run AWS command with key-value pair arguments
+  command: aws s3 ls
+    aws_access_key_id: "{{ aws_access_key_id | default('default_key_id') }}"
+    aws_secret_access_key: "{{ aws_secret_access_key | default('default_secret_key') }}"
+  register: aws_command_output
+
+# Playbook
+---
+
+- name: Run AWS command with custom key-value pair arguments
+  hosts: all
+  roles:
+    - myrole
+  vars:
+    aws_access_key_id: "my_custom_key_id"
+    aws_secret_access_key: "my_custom_secret_key"
