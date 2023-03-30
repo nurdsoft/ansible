@@ -1,0 +1,6 @@
+Ensure that terraform and vault is not present in the localsystem  by checking below commands
+terraform --version
+vault --version
+Run the playbook provided in the repo my changing hosts to localhost
+Again run the commands in Step 2 3 to check that terraform and vault is installed
+It will display the version no of terraform and vault that is installed.
