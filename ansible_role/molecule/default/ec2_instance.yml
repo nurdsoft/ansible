@@ -1,0 +1,30 @@
+---
+- name: Create EC2 Instance
+  hosts: localhost
+  gather_facts: False
+  vars:
+    instance_name: "terraform-vault-instance"
+    Name: "{{ instance_name }}"
+    instance_type: "t2.micro"
+    region: "ap-south-1"
+    ami: "ami-0376ec8eacdf70aae" # RHEL 8
+    subnet_id: "subnet-0d34ab523bd5b2bb2"
+      # security_group: "sg-08a46a0f6e9a43237"
+    keypair: "ansible_key"
+    wait: yes
+    count: 1
+  tasks:
+    - name: "Launch an EC2 Instance"
+      amazon.aws.ec2_instance: 
+        key_name: "{{ keypair }}"
+        instance_type: "{{ instance_type }}"
+        image_id: "{{ ami }}"
+        wait: "{{ wait }}"
+        count: "{{ count }}"
+        region: "{{ region }}"
+          #    groups: "{{ security_group }}"
+        vpc_subnet_id: "{{ subnet_id }}"
+      register: ec2
+    
+     
+ 

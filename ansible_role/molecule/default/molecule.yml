@@ -1,0 +1,19 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: delegated
+
+platforms:
+  - name: instance
+    image: ami-0376ec8eacdf70aae # RHEL 9
+    instance_type: t2.micro
+    key_name: ansible_key
+    vpc_subnet_id: vpc-03aa5dec6b0a064ec
+
+provisioner:
+  name: ansible
+
+verifier:
+  name: testinfra
