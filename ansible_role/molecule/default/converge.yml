@@ -1,6 +1,0 @@
----
-- name: Converge
-  hosts: localhost
-  gather_facts: false
-  roles:
-    - sample.ansible_role
