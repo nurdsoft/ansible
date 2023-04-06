@@ -1,0 +1,12 @@
+---
+    instance_name: "terraform-vault-instance"
+    Name: "{{ instance_name }}"
+    instance_type: "t2.micro"
+    region: "ap-south-1"
+    ami: "ami-0376ec8eacdf70aae" # RHEL 8
+    subnet_id: "subnet-0d34ab523bd5b2bb2"
+      # security_group: "sg-08a46a0f6e9a43237"
+    keypair: "ansible_key"
+    wait: yes
+    count: 1
+
