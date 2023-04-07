@@ -1,0 +1,39 @@
+---
+  - yum: 
+      name: unzip
+      state: present
+
+  - name: Add HashiCorp GPG key
+    rpm_key:
+      key: https://rpm.releases.hashicorp.com/gpg
+      state: present
+
+  - name: Add HashiCorp YUM repository
+    yum_repository:
+      name: hashicorp
+      description: Hashicorp Stable Repository
+      baseurl: https://rpm.releases.hashicorp.com/RHEL/7/$basearch/stable
+      gpgcheck: yes
+      enabled: yes
+
+  - name: Install Terraform
+    yum:
+      name: terraform
+      state: present
+
+  - name: Install Vault
+    yum:
+      name: vault
+      state: present
+
+  - name: "Launch an EC2 Instance"
+    amazon.aws.ec2_instance:
+      key_name: "{{ keypair }}"
+      instance_type: "{{ instance_type }}"
+      image_id: "{{ ami }}"
+      wait: "{{ wait }}"
+      count: "{{ count }}"
+      region: "{{ region }}"
+      # groups: "{{ security_group }}"
+      vpc_subnet_id: "{{ subnet_id }}"
+      # register: ec2

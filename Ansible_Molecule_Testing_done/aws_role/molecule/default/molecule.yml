@@ -1,0 +1,19 @@
+---
+dependency:
+ name: galaxy
+
+driver:
+  name: ec2
+
+platforms:
+  - name: instance
+    image: ami-0376ec8eacdf70aae # RHEL 9
+    instance_type: t2.micro
+    key_name: ansible_key
+    vpc_subnet_id: subnet-0d34ab523bd5b2bb2
+
+provisioner:
+  name: ansible
+
+verifier:
+  name: ansible
