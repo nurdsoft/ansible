@@ -1,0 +1,23 @@
+##Commands for [RHEL/CentOS]
+sudo yum update
+sudo yum install epel-release
+sudo yum install ansible -y
+sudo yum install python-pip -y
+sudo pip install molecule
+
+
+##Commands for [Debian/Ubuntu]
+sudo apt-get update
+sudo apt-get install ansible -y
+sudo apt-get install python-pip -y
+sudo pip install molecule -y
+
+
+##After this Check the versions-
+ansible --version
+molecule --version
+
+
+
+ 
+
