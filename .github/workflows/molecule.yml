@@ -17,7 +17,7 @@ jobs:
         platform: ['centos7', 'debian10']
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Install Dependencies
         run: |
@@ -27,12 +27,15 @@ jobs:
           sudo systemctl start docker
           ansible-galaxy collection install community.docker
           ansible-galaxy collection install ansible.posix
-
-      - name: molecule Test
+      - name: Run Molecule Test
+        if: github.event_name == 'pull_request'
         run: |
           cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}
-          molecule test
+          for dir in ${{ inputs.directory-path }}/* ; do
+            if [ -d "${dir}" ]; then
+              cd "${dir}" && molecule test
+            fi
+          done
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
-
