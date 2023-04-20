@@ -15,23 +15,12 @@ on:
 jobs:
   molecule:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - os: "centos8"
-            tag: "latest"
-          - os: "ubuntu20"
-            tag: "latest"
     steps:
       - uses: actions/checkout@v2
         with:
           path: "${{ github.repository }}"
       - name: Molecule
-        uses: MonolithProjects/action-molecule@v1.4.1
-        with:
-          os: ${{ matrix.config.os }}
-          tag: ${{ matrix.config.tag }}
+        uses: monolithprojects/action-molecule@v1.4.1
 # jobs:
   # molecule:
   #   runs-on: ubuntu-latest
