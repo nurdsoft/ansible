@@ -34,8 +34,7 @@ jobs:
       - name: Molecule Test
         run: |
           cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}roles/terraform-install
-          # make test
-          molecule --version
+          make test
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
