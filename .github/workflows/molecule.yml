@@ -33,7 +33,7 @@ jobs:
 
       - name: Molecule Test
         run: |
-          cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}roles
+          cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}
           ls -lrth
           # molecule test
         env:
