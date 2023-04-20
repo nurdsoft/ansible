@@ -30,12 +30,17 @@ jobs:
           sudo systemctl start docker
           ansible-galaxy collection install community.docker
           ansible-galaxy collection install ansible.posix
-
-      - name: Molecule Test
-        run: |
           cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}roles/terraform-install
           molecule list
         env:
           PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
+
+      # - name: Molecule Test
+      #   run: |
+      #     cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}roles/terraform-install
+      #     molecule list
+      #   env:
+      #     PY_COLORS: '1'
+      #     ANSIBLE_FORCE_COLOR: '1'
 
