@@ -16,14 +16,34 @@ jobs:
   molecule:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        platform: ['centos7', 'debian10']
+        config:
+          - os: "centos8"
+            tag: "latest"
+          - os: "ubuntu20"
+            tag: "latest"
     steps:
       - uses: actions/checkout@v2
         with:
           path: "${{ github.repository }}"
       - name: Molecule
-        uses: monolithprojects/action-molecule@v1.4.1
+        uses: MonolithProjects/action-molecule@v1.4.1
+        with:
+          os: ${{ matrix.config.os }}
+          tag: ${{ matrix.config.tag }}
+# jobs:
+  # molecule:
+  #   runs-on: ubuntu-latest
+  #   strategy:
+  #     matrix:
+  #       platform: ['centos7', 'debian10']
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         path: "${{ github.repository }}"
+  #     - name: Molecule
+  #       uses: monolithprojects/action-molecule@v1.4.1
     # steps:
     #   - name: Checkout Code
     #     uses: actions/checkout@v2
