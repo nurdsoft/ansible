@@ -24,6 +24,11 @@ jobs:
         with:
           path: "${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}roles/terraform-install"
       - uses: gofrolist/molecule-action@v2
+        with:
+          molecule_options: --debug --base-config molecule/default/molecule.yml
+          molecule_command: test
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
     # steps:
     #   - name: Checkout Code
     #     uses: actions/checkout@v2
