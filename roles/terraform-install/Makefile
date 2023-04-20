@@ -9,7 +9,7 @@
 help : Makefile
 		@sed -n 's/^##//p' $<
 
-## test: 		Run Molecule test on an existing role.
+## test: 		Test an existing role.
 test:
 	molecule test
 
@@ -17,9 +17,9 @@ test:
 converge: 
 	molecule converge
 
-## clean: 	Clean up after testing the role.
+## clean: 	Clean up temporary resources created when testing an exsting role.
 clean:	
 	molecule destroy
 
-## all:		Run the entire molecule cycle (test, converge, and clean).
+## all:		Run the entire cycle (test, converge, and clean).
 all: build test clean
