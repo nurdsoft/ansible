@@ -20,7 +20,7 @@ jobs:
         platform: ['centos7', 'debian10']
     
     steps:
-       - name: checkout
+      - name: checkout
         uses: actions/checkout@v3
         with:
           path: "${{ github.repository }}"
