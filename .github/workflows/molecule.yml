@@ -1,10 +1,6 @@
 name: Molecule
 
 on:
-  push:
-    branches:
-      - main
-      - fix/RAD-614
   pull_request_target:
     types:
       - opened
@@ -19,52 +15,6 @@ jobs:
       - uses: actions/checkout@v2
         with:
           path: "${{ github.repository }}"
-      - name: Molecule
+      - name: Molecule Test
         uses: monolithprojects/action-molecule@v1.4.1
-# jobs:
-  # molecule:
-  #   runs-on: ubuntu-latest
-  #   strategy:
-  #     matrix:
-  #       platform: ['centos7', 'debian10']
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         path: "${{ github.repository }}"
-  #     - name: Molecule
-  #       uses: monolithprojects/action-molecule@v1.4.1
-    # steps:
-    #   - name: Checkout Code
-    #     uses: actions/checkout@v2
-      
-    #   - name: Molecule Test
-    #     uses: quay.io/ansible/toolset
-    #     run: |
-    #       cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}roles/terraform-install
-    #       molecule test
-    #     env:
-    #       DOCKER_HOST: 'tcp://docker:2375'
-    #       PY_COLORS: '1'
-    #       ANSIBLE_FORCE_COLOR: '1'
-
-      # - name: Install Dependencies
-      #   run: |
-      #     molecule test
-      #     sudo apt-get update
-      #     sudo apt-get install -y python3-pip
-      #     pip3 install molecule[docker] ansible
-      #     sudo systemctl start docker
-      #     ansible-galaxy collection install community.docker
-      #     ansible-galaxy collection install ansible.posix
-      #   env:
-      #     PY_COLORS: '1'
-      #     ANSIBLE_FORCE_COLOR: '1'
-
-      # - name: Molecule Test
-      #   run: |
-      #     cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}roles/terraform-install
-      #     molecule list
-      #   env:
-      #     PY_COLORS: '1'
-      #     ANSIBLE_FORCE_COLOR: '1'
 
