@@ -22,18 +22,18 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-pip
-          pip3 install molecule[docker] ansible
-          sudo systemctl start docker
-          ansible-galaxy collection install community.docker
-          ansible-galaxy collection install ansible.posix
+      # - name: Install Dependencies
+      #   run: |
+      #     sudo apt-get update
+      #     sudo apt-get install -y python3-pip
+      #     pip3 install molecule[docker] ansible
+      #     sudo systemctl start docker
+      #     ansible-galaxy collection install community.docker
+      #     ansible-galaxy collection install ansible.posix
 
       - name: Molecule Test
         run: |
-          cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}roles/tf-install
+          cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}
           ls -lrth
           # molecule test
         env:
