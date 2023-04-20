@@ -18,26 +18,25 @@ jobs:
     strategy:
       matrix:
         platform: ['centos7', 'debian10']
+    
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+        with:
+          path: "${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}roles/terraform-install"
+      - uses: gofrolist/molecule-action@v2
+    # steps:
+    #   - name: Checkout Code
+    #     uses: actions/checkout@v2
       
-      - name: Molecule Test
-        uses: quay.io/ansible/toolset
-        run: |
-          cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}roles/terraform-install
-          molecule test
-          # sudo apt-get update
-          # sudo apt-get install -y python3-pip
-          # pip3 install molecule[docker] ansible
-          # sudo systemctl start docker
-          # ansible-galaxy collection install community.docker
-          # ansible-galaxy collection install ansible.posix
-          # cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}roles/terraform-install
-        env:
-          DOCKER_HOST: 'tcp://docker:2375'
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
+    #   - name: Molecule Test
+    #     uses: quay.io/ansible/toolset
+    #     run: |
+    #       cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}roles/terraform-install
+    #       molecule test
+    #     env:
+    #       DOCKER_HOST: 'tcp://docker:2375'
+    #       PY_COLORS: '1'
+    #       ANSIBLE_FORCE_COLOR: '1'
 
       # - name: Install Dependencies
       #   run: |
