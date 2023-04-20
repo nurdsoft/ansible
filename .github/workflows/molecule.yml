@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          path: "${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}roles/terraform-install"
+          path: "${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}"
       - name: Molecule
         uses: monolithprojects/action-molecule@v1.4.1
 # jobs:
