@@ -18,14 +18,12 @@ jobs:
     strategy:
       matrix:
         platform: ['centos7', 'debian10']
-    
     steps:
-      - name: checkout
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v2
         with:
           path: "${{ github.repository }}"
-      - name: molecule
-        uses: robertdebock/molecule-action@5.0.2
+      - name: Molecule
+        uses: monolithprojects/action-molecule@v1.4.1
     # steps:
     #   - name: Checkout Code
     #     uses: actions/checkout@v2
