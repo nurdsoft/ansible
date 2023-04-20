@@ -20,5 +20,5 @@ jobs:
         with:
           path: "${{ github.repository }}"
       - name: Molecule Test
-        uses: monolithprojects/action-molecule@v1.4.1k
+        uses: monolithprojects/action-molecule@v1.4.1
 
