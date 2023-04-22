@@ -1,0 +1,2 @@
+version: 1.4.0
+url: "https://releases.hashicorp.com/terraform/{{ version }}/terraform_{{ version }}_linux_amd64.zip"
