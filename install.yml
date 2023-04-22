@@ -1,0 +1,16 @@
+- name: check service
+  hosts: all
+  gather_facts: yes
+  become: yes
+  tasks:
+     - name: include role terraform
+       include_role:
+          name: terraform
+       vars:
+         version: 1.4.5
+
+     - name: include role vault 
+       include_role:
+          name: vault
+       vars:
+         vault_version: 1.12.1
