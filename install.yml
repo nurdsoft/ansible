@@ -6,11 +6,19 @@
      - name: include role terraform
        include_role:
           name: terraform
+          apply:
+            tags: terraform
        vars:
          version: 1.4.5
+       tags:
+         - always
 
      - name: include role vault 
        include_role:
           name: vault
+          apply:
+            tags: vault
        vars:
          vault_version: 1.12.1
+       tags:
+         - always
