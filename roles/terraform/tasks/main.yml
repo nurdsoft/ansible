@@ -1,31 +1,39 @@
 ---
-- name: yum update
-  yum:
-    name: '*'
-    state: latest
-
-- name: Yum Install Packages
-  yum: 
-    name: "{{ item }}"
-    state: latest
-  with_items:
-     - wget
-     - zip
-     - unzip
-
-- name: terraform install
-  unarchive:
-    src: "{{ url }}"
-    dest: /usr/bin
-    remote_src: True
-
 - name: check terraform version
   command: "terraform version"
-  register: terraform_version
+  ignore_errors: yes
+  register: terraform_install
 
-- name: check terraform install correctly 
-  assert:
-    that:
-      - 'version in terraform_version.stdout'
-    fail_msg: "terraform version incorrect"
-    success_msg: "terraform installed correctly with version {{ version }}"
+- name: block install terrafrom
+  block:
+    - name: yum update
+      yum:
+        name: '*'
+        state: latest
+
+    - name: Yum Install Packages
+      yum: 
+        name: "{{ item }}"
+        state: latest
+      with_items:
+        - wget
+        - zip
+        - unzip
+
+    - name: terraform install
+      unarchive:
+        src: "{{ url }}"
+        dest: /usr/bin
+        remote_src: True
+
+    - name: check terraform version
+      command: "terraform version"
+      register: terraform_version
+
+    - name: check terraform install correctly 
+      assert:
+        that:
+          - 'version in terraform_version.stdout'
+        fail_msg: "terraform version incorrect"
+        success_msg: "terraform installed correctly with version {{ version }}"
+  when: terraform_install.rc != 0
