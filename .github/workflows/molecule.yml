@@ -1,38 +1,23 @@
-name: Molecule Test
+name: Molecule
 
 on:
-  workflow_dispatch:
-  pull_request:
-    branches:
-      - main
   push:
     branches:
       - main
+  pull_request_target:
+    types:
+      - opened
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
-  molecule_test:
+  molecule:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        platform: ['centos7', 'debian10']
     steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
-
-      - name: Install Dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y python3-pip
-          pip3 install molecule[docker] ansible
-          sudo systemctl start docker
-          ansible-galaxy collection install community.docker
-          ansible-galaxy collection install ansible.posix
-
-      - name: molecule Test
-        run: |
-          cd ${{ github.workspace }}/${{ github.event.pull_request.head.repo.name }}
-          molecule test
-        env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
+      - uses: actions/checkout@v2
+        with:
+          path: "${{ github.repository }}"
+      - name: Molecule Test
+        uses: monolithprojects/action-molecule@v1.4.1
 
