@@ -1,13 +1,17 @@
 # ansible 
 
-## Assignment
+Create an Ansible Playbook to install HashiCorp Terraform and HashiCorp Vault on a Linux OS, supporting both RHEL and Debian distributions.
+    - Bonus: Check for existing installation/s.
 
-1. Create an Ansible Playbook to install HashiCorp Terraform and Vault on a Linux OS of your choosing.
-    - Bonus: 
-        - Check for existing installation/s.
-        - Support both RHEL and Debian distributions.
-2. Provide step/s to test the Playbook **locally**.
-    - Bonus: Leverage a unit testing framework.
+## Example
+
+```sh
+# Test the Role
+$ molecule test # or molecule converge
+
+# Clean up
+$ molecule destroy
+```
 
 ## What to Submit
 
