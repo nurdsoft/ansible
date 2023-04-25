@@ -1,5 +1,0 @@
-vault_version: "1.12.0"
-vault_install_prerequisites: ['unzip']
-vault_user: "vault"
-vault_group: "vault"
-vault_config_path: "/etc/vault.hcl"
