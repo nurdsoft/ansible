@@ -1,0 +1,8 @@
+---
+- name: Converge
+  hosts: all
+  remote_user: root
+  tasks:
+    - name: "Include vault-install"
+      include_role:
+        name: "vault"

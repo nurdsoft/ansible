@@ -1,0 +1,18 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  remote_user: root
+  vars:
+    vault_version: 1.12.1
+  tasks:
+    - name: check vault version
+      shell: /usr/local/bin/vault --version
+      register: vault_version_installed
+
+    - name: check terraform install correctly 
+      assert:
+        that:
+          - 'vault_version in vault_version_installed.stdout'
+        fail_msg: "vault version incorrect"
+        success_msg: "vault installed correctly with version {{ vault_version }}"
