@@ -1,7 +1,0 @@
----
-- name: Converge
-  hosts: all
-  tasks:
-    - name: "Include vault-install"
-      include_role:
-        name: "vault"
